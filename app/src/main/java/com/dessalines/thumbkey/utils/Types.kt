@@ -48,7 +48,32 @@ data class KeyItemC(
     val swipeType: SwipeNWay = SwipeNWay.EIGHT_WAY,
     val slideType: SlideType = SlideType.NONE,
     val longPress: KeyAction? = null,
-)
+) {
+    constructor(
+        topLeft: KeyC,
+        top: KeyC,
+        topRight: KeyC,
+        left: KeyC,
+        center: KeyC,
+        right: KeyC,
+        bottomLeft: KeyC,
+        bottom: KeyC,
+        bottomRight: KeyC,
+    ) : this(
+        center = center,
+        swipes =
+            mapOf(
+                SwipeDirection.TOP_LEFT to topLeft,
+                SwipeDirection.TOP to top,
+                SwipeDirection.TOP_RIGHT to topRight,
+                SwipeDirection.LEFT to left,
+                SwipeDirection.RIGHT to right,
+                SwipeDirection.BOTTOM_LEFT to bottomLeft,
+                SwipeDirection.BOTTOM to bottom,
+                SwipeDirection.BOTTOM_RIGHT to bottomRight,
+            ),
+    )
+}
 
 data class KeyC(
     val display: KeyDisplay?,
@@ -56,7 +81,13 @@ data class KeyC(
     val action: KeyAction,
     val color: ColorVariant = ColorVariant.SECONDARY,
     val size: FontSizeVariant = FontSizeVariant.SMALL,
-)
+) {
+    constructor(character: Char) : this(
+        display = KeyDisplay.TextDisplay(character.toString()),
+        action = KeyAction.CommitText(character.toString()),
+        color = if (character.isLetterOrDigit()) ColorVariant.SECONDARY else ColorVariant.MUTED,
+    )
+}
 
 sealed class KeyDisplay {
     class TextDisplay(val text: String) : KeyDisplay()

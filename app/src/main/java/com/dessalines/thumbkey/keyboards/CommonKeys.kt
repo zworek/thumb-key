@@ -615,3 +615,9 @@ val SPACEBAR_FRENCH_TYPESPLIT_BOTTOM_KEY_ITEM =
                 KeyAction.ReplaceLastText(" ; ", trimCount = 3),
             ),
     )
+
+val DUMMY_KEY =
+    KeyC(
+        action = KeyAction.CommitText(""),
+        display = KeyDisplay.TextDisplay(""),
+    )

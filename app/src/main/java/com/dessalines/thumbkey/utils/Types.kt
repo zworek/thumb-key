@@ -83,10 +83,11 @@ data class KeyC(
     val color: ColorVariant = ColorVariant.SECONDARY,
     val size: FontSizeVariant = FontSizeVariant.SMALL,
 ) {
-    constructor(character: Char) : this(
+    constructor(character: Char, size: FontSizeVariant = FontSizeVariant.SMALL) : this(
         display = KeyDisplay.TextDisplay(character.toString()),
         action = KeyAction.CommitText(character.toString()),
         color = if (character.isLetterOrDigit()) ColorVariant.SECONDARY else ColorVariant.MUTED,
+        size = size,
     )
 }
 

@@ -4,6 +4,7 @@ import android.view.KeyEvent
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.dessalines.thumbkey.R
+import com.dessalines.thumbkey.keyboards.DUMMY_KEY
 
 data class KeyboardDefinitionModes(
     val main: KeyboardC,
@@ -62,16 +63,16 @@ data class KeyItemC(
     ) : this(
         center = center,
         swipes =
-            mapOf(
-                SwipeDirection.TOP_LEFT to topLeft,
-                SwipeDirection.TOP to top,
-                SwipeDirection.TOP_RIGHT to topRight,
-                SwipeDirection.LEFT to left,
-                SwipeDirection.RIGHT to right,
-                SwipeDirection.BOTTOM_LEFT to bottomLeft,
-                SwipeDirection.BOTTOM to bottom,
-                SwipeDirection.BOTTOM_RIGHT to bottomRight,
-            ),
+            listOfNotNull(
+                (SwipeDirection.TOP_LEFT to topLeft).takeIf { topLeft != DUMMY_KEY },
+                (SwipeDirection.TOP to top).takeIf { top != DUMMY_KEY },
+                (SwipeDirection.TOP_RIGHT to topRight).takeIf { topRight != DUMMY_KEY },
+                (SwipeDirection.LEFT to left).takeIf { left != DUMMY_KEY },
+                (SwipeDirection.RIGHT to right).takeIf { right != DUMMY_KEY },
+                (SwipeDirection.BOTTOM_LEFT to bottomLeft).takeIf { bottomLeft != DUMMY_KEY },
+                (SwipeDirection.BOTTOM to bottom).takeIf { bottom != DUMMY_KEY },
+                (SwipeDirection.BOTTOM_RIGHT to bottomRight).takeIf { bottomRight != DUMMY_KEY },
+            ).toMap(),
     )
 }
 
